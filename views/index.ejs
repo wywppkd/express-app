@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/static/stylesheets/style.css' />
+    <title>首页</title>
+    <link rel="stylesheet" href="/static/stylesheets/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <button class="logout">退出登录</button>
+    <p>欢迎<%= user %></p>
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.js"></script>
+    <script>
+      // 退出登录
+      $(".logout").click(function() {
+        $.ajax({
+          url: "/user/logout",
+          type: "POST",
+          success: function(res) {
+            console.log("退出成功");
+            console.log("TCL: res", res);
+            if (res.code === "0000") {
+              location.href = "/user/login";
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>
