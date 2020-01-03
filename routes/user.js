@@ -11,12 +11,12 @@ router
     res.render("login");
   })
   .post("/login", function(req, res, next) {
-    console.log("TCL: req.body", req.body);
     if (req.body.user === "admin" && req.body.password === "123456") {
       req.session.user = req.body.user;
       res.redirect("/");
     } else {
-      res.send("login fail");
+      let error = req.body.user !== "admin" ? "账号错误" : "密码错误";
+      res.render("login", { error: error });
     }
   });
 
